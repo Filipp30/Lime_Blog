@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:flutter_forum/Models/location_model.dart';
 
 class PlaceModel {
-  final String id;
+  final int id;
   final String userName;
   final String title;
   final String description;
-  final File image;
+  final String imageUrl;
   final LocationModel location;
 
   const PlaceModel({
@@ -14,7 +14,7 @@ class PlaceModel {
     required this.userName,
     required this.title,
     required this.description,
-    required this.image,
+    required this.imageUrl,
     required this.location,
   });
 }

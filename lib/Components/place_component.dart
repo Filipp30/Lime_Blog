@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class PlaceComponent extends StatefulWidget {
   late final String imageUrl;
-  late final String locationName;
+  late final String title;
   late final String authorName;
 
-  PlaceComponent({required this.imageUrl, required this.locationName, required this.authorName});
+  PlaceComponent({required this.imageUrl, required this.title, required this.authorName});
   @override
   State<PlaceComponent> createState() => _PlaceComponentState();
 }
@@ -51,7 +51,7 @@ class _PlaceComponentState extends State<PlaceComponent> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text('Location : '+widget.locationName,
+                          child: Text('Location : '+widget.title,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Colors.white,
