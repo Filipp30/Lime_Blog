@@ -5,7 +5,7 @@ import 'package:flutter_forum/Views/place_details_view.dart';
 
 import 'package:provider/provider.dart';
 import 'Views/home_view.dart';
-import 'Views/publishing_place_view.dart';
+import 'Views/add_new_place_view.dart';
 import 'Views/show_all_places_view.dart';
 
 void main() {
@@ -17,11 +17,12 @@ void main() {
         primarySwatch: Colors.deepOrange,
       ),
       home: Home(),
+      initialRoute: AddNewPlaceView.routeName,
       routes: {
         ShowAllPlacesView.routeName: (context) => ShowAllPlacesView(),
         PlaceDetailsView.routeName: (context) => PlaceDetailsView(),
         AddCommentView.routeName: (context) => AddCommentView(),
-        PublishingPlaceView.routeName: (context) => PublishingPlaceView(),
+        AddNewPlaceView.routeName: (context) => AddNewPlaceView(),
       },
     ),
   ));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_forum/Views/publishing_place_view.dart';
+import 'package:flutter_forum/Views/add_new_place_view.dart';
 import 'package:flutter_forum/Views/show_all_places_view.dart';
 
 class Home extends StatelessWidget {
@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
       ),
       body: ShowAllPlacesView(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Navigator.of(context).pushNamed(PublishingPlaceView.routeName); },
+        onPressed: () { Navigator.of(context).pushNamed(AddNewPlaceView.routeName); },
         child: const Icon(Icons.add),
       ),
     );
