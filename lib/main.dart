@@ -17,7 +17,7 @@ void main() {
         primarySwatch: Colors.deepOrange,
       ),
       home: Home(),
-      initialRoute: AddNewPlaceView.routeName,
+      // initialRoute: AddNewPlaceView.routeName,
       routes: {
         ShowAllPlacesView.routeName: (context) => ShowAllPlacesView(),
         PlaceDetailsView.routeName: (context) => PlaceDetailsView(),
