@@ -23,11 +23,14 @@ class ShowAllPlacesView extends StatelessWidget {
               itemCount:PlacesProvider.placesList.length,
               itemBuilder: (context, index){
                 return PlaceComponent(
+                  id: PlacesProvider.placesList[index].id,
                   imageUrl: PlacesProvider.placesList[index].imageUrl,
-                  title: PlacesProvider.placesList[index].title,
+                  location: PlacesProvider.placesList[index].locationName,
                   authorName: PlacesProvider.placesList[index].userName,
+                  description: PlacesProvider.placesList[index].description,
+                  title: PlacesProvider.placesList[index].title
                 );
-              } ,
+              },
             ),
           );
         }

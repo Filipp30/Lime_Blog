@@ -3,27 +3,43 @@ import 'package:flutter_forum/Components/AddNewPlaceComponents/credentials_input
 import 'package:flutter_forum/Components/AddNewPlaceComponents/image_input_component.dart';
 import 'package:flutter_forum/Components/AddNewPlaceComponents/location_input_component.dart';
 import 'dart:io';
-
 import 'package:flutter_forum/Models/location_model.dart';
-import 'package:flutter_forum/Services/data_base_service.dart';
+import 'package:flutter_forum/Providers/places_provider.dart';
+import 'package:flutter_forum/Views/show_all_places_view.dart';
+import 'package:provider/provider.dart';
 
 class AddNewPlaceView extends StatefulWidget {
   static const routeName = 'add-new-place';
-
   @override
   State<AddNewPlaceView> createState() => _AddNewPlaceViewState();
 }
 
 class _AddNewPlaceViewState extends State<AddNewPlaceView> {
-  late String title;
-  late String description;
-  late LocationModel locationData;
-  late File storedImage;
+  late String _title;
+  late String _description;
+  late LocationModel _locationData;
+  late File _storedImage;
 
-  void setTitle(String value){title = value;}
-  void setDescription(String value){description = value;}
-  void setLocationData(LocationModel value){locationData = value;}
-  void setStoredImage(File value){storedImage = value;}
+  void setTitle(String value){_title = value;}
+  void setDescription(String value){_description = value;}
+  void setLocationData(LocationModel value){_locationData = value;}
+  void setStoredImage(File value){_storedImage = value;}
+
+  bool _showCircularProgressIndicator = false;
+
+  Future<void> _savePlace() async {
+    if (_title.isEmpty || _description.isEmpty) {
+      return;
+    }
+    setState(() { _showCircularProgressIndicator = true; });
+    var result = await Provider.of<PlacesProvider>(context, listen: false).addBlogPlace(_title,_description,_locationData);
+    if (result == true) {
+      Navigator.of(context).pop(ShowAllPlacesView.routeName);
+    } else {
+      setState(() { _showCircularProgressIndicator = false; });
+      print('Error in add_new_place_view');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +53,8 @@ class _AddNewPlaceViewState extends State<AddNewPlaceView> {
         children: [
           Expanded(
 
-          child: SingleChildScrollView(
+          child: _showCircularProgressIndicator ? const Center(child: CircularProgressIndicator()) :
+          SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(
@@ -61,8 +78,8 @@ class _AddNewPlaceViewState extends State<AddNewPlaceView> {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
             ),
-            onPressed: (){
-              DataBaseService.addPlace(title, description, locationData);
+            onPressed: () async {
+              _savePlace();
             },
           ),
         ]

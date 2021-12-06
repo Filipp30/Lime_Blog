@@ -1,6 +1,6 @@
 
 class PlaceModel {
-  final int id;
+  final String id;
   final String userName;
   final String title;
   final String description;

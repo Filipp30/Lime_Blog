@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_forum/Models/place_model.dart';
+import 'package:flutter_forum/Views/place_details_view.dart';
 
 class PlaceComponent extends StatefulWidget {
-  late final String imageUrl;
+  late final String id;
   late final String title;
+  late final String imageUrl;
+  late final String location;
   late final String authorName;
+  late final String description;
 
-  PlaceComponent({required this.imageUrl, required this.title, required this.authorName});
+  PlaceComponent({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.location,
+    required this.authorName,
+    required this.description
+  });
   @override
   State<PlaceComponent> createState() => _PlaceComponentState();
 }
 
 class _PlaceComponentState extends State<PlaceComponent> {
   late bool isFavorite = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +43,17 @@ class _PlaceComponentState extends State<PlaceComponent> {
             height: 300,
             child: InkWell(
               onTap: (){
-
+                Navigator.pushNamed(
+                  context,
+                    PlaceDetailsView.routeName,
+                    arguments: PlaceModel(
+                        id: widget.id,
+                        userName: widget.authorName,
+                        title: widget.title,
+                        description: widget.description,
+                        imageUrl: widget.imageUrl,
+                        locationName: widget.location
+                    ));
               },
             ),
           ),
@@ -51,7 +74,7 @@ class _PlaceComponentState extends State<PlaceComponent> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text('Location : '+widget.title,
+                          child: Text('Location : '+widget.location,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               color: Colors.white,
