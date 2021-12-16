@@ -5,7 +5,7 @@ import 'package:flutter_forum/Components/AddNewPlaceComponents/location_input_co
 import 'dart:io';
 import 'package:flutter_forum/Models/location_model.dart';
 import 'package:flutter_forum/Providers/places_provider.dart';
-import 'package:flutter_forum/Views/show_all_places_view.dart';
+import 'package:flutter_forum/Views/forum/show_all_places_view.dart';
 import 'package:provider/provider.dart';
 
 class AddNewPlaceView extends StatefulWidget {
@@ -52,7 +52,6 @@ class _AddNewPlaceViewState extends State<AddNewPlaceView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-
           child: _showCircularProgressIndicator ? const Center(child: CircularProgressIndicator()) :
           SingleChildScrollView(
             child: Padding(

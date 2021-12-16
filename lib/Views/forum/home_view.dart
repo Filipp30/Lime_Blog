@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_forum/Views/add_new_place_view.dart';
-import 'package:flutter_forum/Views/show_all_places_view.dart';
+import 'package:flutter_forum/Views/forum/add_new_place_view.dart';
+import 'package:flutter_forum/Views/forum/show_all_places_view.dart';
 
 class Home extends StatelessWidget {
 

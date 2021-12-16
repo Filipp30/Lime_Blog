@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_forum/Models/place_model.dart';
-import 'package:flutter_forum/Views/place_details_view.dart';
+import 'package:flutter_forum/Views/forum/place_details_view.dart';
 
 class PlaceComponent extends StatefulWidget {
   late final String id;

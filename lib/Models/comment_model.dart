@@ -1,13 +1,13 @@
 
 class CommentModel{
 
-  final String id;
+  final String ?id;
   final String comment;
-  final String userId;
+  final String ?userId;
 
   const CommentModel({
-    required this.id,
+    this.id,
     required this.comment,
-    required this.userId,
+    this.userId,
   });
 }
