@@ -4,7 +4,7 @@ import 'package:flutter_forum/Views/forum/add_new_place_view.dart';
 import 'package:flutter_forum/Views/forum/show_all_places_view.dart';
 
 class Home extends StatelessWidget {
-
+  static const routeName = 'home-page';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

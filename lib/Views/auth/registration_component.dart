@@ -1,25 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_forum/Models/user_model.dart';
+import 'package:flutter_forum/Providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
   class RegistrationComponent extends StatelessWidget {
+
+    final Function registrationCompletedCallBack;
+
+    const RegistrationComponent({required this.registrationCompletedCallBack});
 
     @override
     Widget build(BuildContext context) {
       return SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Card(
-            child: Registration()
+            child: Registration(callBack: registrationCompletedCallBack)
           ),
         ) ,
       );
     }
+}
+
+  class Registration extends StatefulWidget {
+    final Function callBack;
+    const Registration({required this.callBack});
+    @override
+    State<Registration> createState() => _RegistrationState();
   }
 
-  class Registration extends StatelessWidget {
+  class _RegistrationState extends State<Registration> {
     bool _isLoading = false;
-    void _submitRegistration(){
+    final TextEditingController _userNameController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
 
+    void _submitRegistration() async {
+      setState(() { _isLoading = true; });
+      final authProvider = Provider.of<AuthBase>(context, listen: false);
+      try {
+        final UserModel user = UserModel(userName: _userNameController.text, email: _emailController.text, password: _passwordController.text);
+        final int response = await authProvider.createNewUser(user);
+        if (response == 200) {
+          widget.callBack();
+        } else {
+          print('Response code : ${response.toString()}');
+        }
+      } catch (e) {
+        print(e.toString());
+      } finally {
+        setState(() { _isLoading = false; });
+        _userNameController.clear();
+        _emailController.clear();
+        _passwordController.clear();
+      }
     }
+
     @override
     Widget build(BuildContext context) {
       return Padding(
@@ -48,6 +84,7 @@ import 'package:flutter/material.dart';
     TextField _buildUserNameTextField() {
       bool showErrorText = false;
       return TextField(
+        controller: _userNameController,
           decoration: InputDecoration(
             labelText: 'User name',
             errorText: showErrorText ? 'Username is required' : null,
@@ -61,6 +98,7 @@ import 'package:flutter/material.dart';
     TextField _buildEmailTextField() {
       bool showErrorText = false;
       return TextField(
+        controller: _emailController,
         decoration: InputDecoration(
           labelText: 'Email',
           hintText: '.......@......com',
@@ -76,6 +114,7 @@ import 'package:flutter/material.dart';
     TextField _buildPasswordTextField() {
       bool showErrorText = false;
       return TextField(
+        controller: _passwordController,
         decoration: InputDecoration(
           labelText: 'Password',
           errorText: showErrorText ? 'Password is required' : null,
@@ -87,6 +126,6 @@ import 'package:flutter/material.dart';
         onEditingComplete: _submitRegistration,
       );
     }
-  }
+}
 
 

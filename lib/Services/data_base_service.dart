@@ -84,4 +84,19 @@ class DataBaseService{
     }
   }
 
+  static Future<int> loginWitchCredentials(UserModel userModel) async {
+    final url = Uri.parse(_publicBackEndApi+'/api/login');
+    final client = http.Client();
+    try {
+      var response = await client.post(url,body: {
+        'email' : userModel.email,
+        'password' : userModel.password
+      });
+      print(json.decode(response.body));
+      return response.statusCode;
+    } finally {
+      client.close();
+    }
+  }
+
 }

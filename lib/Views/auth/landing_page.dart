@@ -11,6 +11,10 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   bool _loginPageEnabled = false;
 
+  void _switchToLoginPage(){
+    setState(() { _loginPageEnabled = true; });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +48,6 @@ class _LandingPageState extends State<LandingPage> {
     if (_loginPageEnabled) {
       return LoginComponent();
     }
-    return RegistrationComponent();
+    return RegistrationComponent(registrationCompletedCallBack: _switchToLoginPage);
   }
 }
